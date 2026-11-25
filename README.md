@@ -16,6 +16,10 @@ Runs **RVC v2** on Apple MLX and optional **Beatrice v2** on native ARM-NEON beh
 
 > **Note:** SwiftRVC was built for personal use on a base M1 8GB Mac and is **not actively maintained**, since I am working on other projects. Expect some issues, slop, and little testing on other machines. You are encouraged to fork or copy this repo and do whatever you want with it.
 
+<div align="center">
+  <img src="assets/demo.gif" alt="SwiftRVC macOS UI" width="360" />
+</div>
+
 ## Features
 
 - **RVC v2 on Apple MLX:** Pure-MLX ContentVec, BN-folded RMVPE, Fast YIN, and NSF-HiFiGAN with direct `.pth` loading and memory-mapped `.index` retrieval using ~6 MB RAM instead of 270+ MB.
