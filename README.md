@@ -22,7 +22,7 @@ Runs **RVC v2** on Apple MLX and optional **Beatrice v2** on native ARM-NEON beh
 
 
 
-**Note:** SwiftRVC was built for personal use on a base M1 8GB Mac and is ***not actively maintained (but I might do some updates in the future)**, since I am working on other projects. Expect some issues, slop, and little testing on other machines. You are encouraged to fork or copy this repo and do whatever you want with it.
+**Note:** SwiftRVC was built for personal use on a base M1 8GB Mac and is ***not actively maintained (but I might do some updates in the future)**, since I am working on other projects. Expect some issues, slop, and little testing on other machines. You are encouraged to fork or copy this repo and do whatever you want with it in accordance with the MIT license.
 
 
 
