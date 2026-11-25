@@ -1,27 +1,41 @@
-<div align="center">
+<div align="left">
 
 <h1>
-  <img src="assets/logo.png" alt="SwiftRVC logo" width="160" align="absmiddle" />
+  <img src="assets/logo.png" alt="SwiftRVC logo" width="75" align="absmiddle" />
   SwiftRVC
 </h1>
 
 **Swiftest native macOS real-time voice changer for Apple Silicon, built for lowest M configuration (M1 8GB Macbook Air).**
 
 [![Platform](https://img.shields.io/badge/macOS-Apple%20Silicon-000000?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Fargile/SwiftRVC)
+
 [![Swift](https://img.shields.io/badge/SwiftUI-CoreAudio-F05138?style=for-the-badge&logo=swift&logoColor=white)](https://github.com/Fargile/SwiftRVC)
+
 [![Apple MLX](https://img.shields.io/badge/Engine-Apple%20MLX%20%2B%20Beatrice%20v2-1D1D1F?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/ml-explore/mlx)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Not%20Actively%20Maintained-orange?style=for-the-badge)](https://github.com/Fargile/SwiftRVC)
+[![Status](https://img.shields.io/badge/Status-Not%20Actively%20Maintained*-red?style=for-the-badge)](https://github.com/Fargile/SwiftRVC)
 
 </div>
 
 Runs **RVC v2** on Apple MLX and optional **Beatrice v2** on native ARM-NEON behind a ~1.6 MB SwiftUI and CoreAudio app. No Electron, PyTorch, librosa, FAISS, or full Xcode required.
 
-> **Note:** SwiftRVC was built for personal use on a base M1 8GB Mac and is **not actively maintained**, since I am working on other projects. Expect some issues, slop, and little testing on other machines. You are encouraged to fork or copy this repo and do whatever you want with it.
+
+
+**Note:** SwiftRVC was built for personal use on a base M1 8GB Mac and is ***not actively maintained (but I might do some updates in the future)**, since I am working on other projects. Expect some issues, slop, and little testing on other machines. You are encouraged to fork or copy this repo and do whatever you want with it.
+
+
+
+
+## PREVIEW
+
 
 <div align="center">
-  <img src="assets/demo.gif" alt="SwiftRVC macOS UI" width="360" />
+  <img src="assets/demo.gif" alt="SwiftRVC macOS UI" width="320" />
 </div>
+
+
+
 
 ## Features
 
