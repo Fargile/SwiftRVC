@@ -1,0 +1,38 @@
+# macOS & build artifacts
+.DS_Store
+SwiftRVC.app/
+app/.build/
+app/.swiftpm/
+
+# Python venv & caches
+.venv/
+__pycache__/
+*.py[cod]
+
+# User data, personal models, recordings, and tuned settings
+models/
+beatrice_models/
+base_models/
+recordings/
+test_audio/
+model_settings.json
+test_ipc.py
+benchmark_engine.py
+
+# Precompiled third-party Beatrice binaries (fetched/built locally via setup.sh)
+beatrice/lib/
+beatrice/*.dylib
+beatrice/*.a
+
+# Audio / weight files
+*.pth
+*.index
+*.safetensors
+*.bin
+*.wav
+*.m4a
+*.mp3
+*.flac
+*.ogg
+*.mp4
+*.sock
