@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1>
-  <img src="assets/logo.png" alt="SwiftRVC logo" width="42" align="absmiddle" />
+  <img src="assets/logo.png" alt="SwiftRVC logo" width="160" align="absmiddle" />
   SwiftRVC
 </h1>
 
