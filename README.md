@@ -107,4 +107,4 @@ SwiftRVC is licensed under the MIT License. See [LICENSE](LICENSE). Optional ext
 MIT License
 Copyright (c) 2026 Fargile
 
-Built with AI assistance from **Google Gemini**.
+Built with AI assistance from **Google Gemini**. Not affiliated with Apple Inc.
