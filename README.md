@@ -1,6 +1,9 @@
 <div align="center">
 
-# SwiftRVC
+<h1>
+  <img src="assets/logo.png" alt="SwiftRVC logo" width="42" align="absmiddle" />
+  SwiftRVC
+</h1>
 
 **Swiftest native macOS real-time voice changer for Apple Silicon, built for lowest M configuration (M1 8GB Macbook Air).**
 

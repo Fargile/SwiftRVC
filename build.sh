@@ -20,6 +20,9 @@ mkdir -p "${MACOS_DIR}" "${RESOURCES_DIR}"
 
 cp "${APP_DIR}/.build/release/${APP_NAME}" "${MACOS_DIR}/${APP_NAME}"
 cp "${APP_DIR}/Resources/Info.plist" "${CONTENTS_DIR}/Info.plist"
+if [ -f "${APP_DIR}/Resources/AppIcon.icns" ]; then
+    cp "${APP_DIR}/Resources/AppIcon.icns" "${RESOURCES_DIR}/AppIcon.icns"
+fi
 chmod +x "${MACOS_DIR}/${APP_NAME}"
 
 # ad-hoc sign so macos keeps mic/audio tcc permissions stable
