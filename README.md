@@ -14,7 +14,7 @@
 [![Apple MLX](https://img.shields.io/badge/Engine-Apple%20MLX%20%2B%20Beatrice%20v2-1D1D1F?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/ml-explore/mlx)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Not%20Actively%20Maintained*-red?style=for-the-badge)](https://github.com/Fargile/SwiftRVC)
+[![Updates](https://img.shields.io/badge/Updates-Occasional-orange?style=for-the-badge)](https://github.com/Fargile/SwiftRVC)
 
 </div>
 
@@ -35,6 +35,15 @@ No Electron, PyTorch, librosa, FAISS, weight-conversion scripts, or full Xcode i
 <div align="center">
   <img src="assets/demo.gif" alt="SwiftRVC macOS UI" width="320" />
 </div>
+
+### Quick Start (Xcode command line tools required!)
+> Navigate to releases to download the pre-built if you do not have xcode installed.
+> or `xcode-select --install` in the terminal first.
+
+```bash
+git clone https://github.com/Fargile/SwiftRVC.git && cd SwiftRVC
+./setup.sh && ./build.sh && open SwiftRVC.app
+```
 
 ## Features
 
