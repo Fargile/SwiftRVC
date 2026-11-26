@@ -1,6 +1,8 @@
 # Third-Party Licenses & Acknowledgments
 
-SwiftRVC's own source code (`app/`, `engine/`, `beatrice/beatrice_bridge.cpp`, `setup.sh`, `build.sh`) is licensed under the MIT License.
+SwiftRVC's own source code (`app/Sources/`, `engine/`, `beatrice/beatrice_bridge.cpp`, `setup.sh`, `build.sh`) is licensed under the MIT License.
+
+The SwiftRVC logo and app icon (`assets/logo.png`, `app/Resources/logo.png`, `app/Resources/AppIcon.icns`) are licensed separately under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/) (Copyright (c) 2026 Fargile). You are free to use and redistribute them for personal or commercial projects, as long as you credit **Fargile** wherever the logo is visible and do not alter, modify, or deface it.
 
 Optional downloaded weights, libraries, and models fetched by `setup.sh` or supplied by the user remain subject to their respective upstream licenses:
 

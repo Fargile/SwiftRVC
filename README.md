@@ -157,13 +157,39 @@ Beatrice v2 binaries and voice packs are not bundled in this repo. To enable the
 
 Feel free to copy or fork this repository and modify it however you want. I am not actively maintaining it, so forking is usually faster than waiting on reviews. If you do submit a PR, AI-assisted code is accepted as long as you test it and take responsibility for what it generated.
 
+## Reference Docs
+
+### Docs and Specs Used in SwiftRVC
+
+- **Apple CoreAudio and Process Taps:** [CoreAudio Documentation](https://developer.apple.com/documentation/coreaudio) for `AUHAL` low-latency audio I/O and macOS 14.2+ `AudioHardwareCreateProcessTap` per-app capture.
+- **Apple MLX:** [MLX Documentation](https://ml-explore.github.io/mlx/) for unified-memory Apple Silicon Metal inference.
+- **Audio EQ Cookbook:** [Robert Bristow-Johnson's Biquad Cookbook](https://webaudio.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html) for real-time high-pass, tone, and output polish DSP filters.
+- **YIN Pitch Estimation:** [de Cheveigné & Kawahara (2002)](https://audition.ens.fr/adc/pdf/2002_JASA_YIN.pdf) for the lightweight CPU pitch estimator.
+- **FAISS Index Format:** [facebookresearch/faiss](https://github.com/facebookresearch/faiss) `IndexIVFFlat` binary layout, used to memory-map `.index` files directly in NumPy without installing `faiss-cpu`.
+- **Beatrice v2 C API:** [prj-beatrice/beatrice-vst](https://github.com/prj-beatrice/beatrice-vst) for `beatrice.h` and the ARM64 NEON static library interface.
+
+### Upstream Projects and Inspiration
+
+SwiftRVC was written from scratch using public docs and standard model formats. While Google Gemini was used to help write and benchmark the code, no other voice changer's source code was copied or fed to AI. This project would not be possible without the open-source ecosystem, model formats, tools, and inspirations below:
+
+- [RVC-Project/Retrieval-based-Voice-Conversion-WebUI](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI): Upstream RVC v2 architecture and `.pth` / `.index` model format supported by SwiftRVC.
+- [w-okada/voice-changer](https://github.com/w-okada/voice-changer): Pioneered real-time RVC streaming and SOLA overlap-add crossfading that inspired this project.
+- [lexandstuff on Hugging Face](https://huggingface.co/lexandstuff): MIT-licensed MLX ContentVec and RMVPE base weights downloaded during setup.
+- [prj-beatrice/beatrice-vst](https://github.com/prj-beatrice/beatrice-vst): Optional Beatrice v2 `libbeatrice.a` engine and voice pack format bridged by SwiftRVC.
+- [ExistentialAudio/BlackHole](https://github.com/ExistentialAudio/BlackHole): Optional macOS virtual audio driver used for routing output to other apps.
+
 ## License and Credits
 
-SwiftRVC is licensed under the MIT License. See [LICENSE](LICENSE). Optional external components such as MLX base weights, Project Beatrice's `libbeatrice.a` and voice packs, and BlackHole 2ch keep their own licenses; see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
+- **Source Code:** Licensed under the [MIT License](LICENSE).
 
+- **Logo & App Icon:** `assets/logo.png`, `app/Resources/logo.png`, and `app/Resources/AppIcon.icns` are licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/). You may use them freely for personal or commercial projects, provided you credit **Fargile** wherever the logo is visible and do not alter or deface it.
 
-MIT License
+- **Third-Party Components:** Optional external components such as MLX base weights, Project Beatrice's `libbeatrice.a` and voice packs, and BlackHole 2ch keep their own licenses. See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
+
+---
+
+MIT License<br>
 Copyright (c) 2026 Fargile
 
-Built and benchmarked with help from AI assistance: **Google Gemini**. 
+Built and benchmarked with help from AI assistance: **Google Gemini**.<br>
 Project Not affiliated with **Apple Inc.**
