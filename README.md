@@ -60,6 +60,8 @@ No Electron, PyTorch, librosa, FAISS, weight-conversion scripts, or full Xcode i
 
 Most desktop voice changers on macOS wrap PyTorch MPS and FAISS inside Electron, which pushes unified memory into swap on 8 GB machines once Discord and a browser are open. CLI or SDK-only MLX ports speed up offline inference, but typically lack a live CoreAudio streaming loop, SOLA crossfading, and virtual-cable/app routing.
 
+**Notice:** For reference of similar software only. Some are intended for a different purposes instead of daily-driving in your online spaces.
+
 | Metric on Base M1 8GB | **SwiftRVC** | Typical Electron + PyTorch MPS Client | Typical Offline MLX Port |
 |---|---|---|---|
 | **Live Mic / App Streaming** | Native CoreAudio AUHAL + Process Tap | Browser WebAudio / PortAudio bridge | Offline files or developer SDK |
