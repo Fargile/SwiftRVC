@@ -18,7 +18,9 @@
 
 </div>
 
-Runs **RVC v2** on Apple MLX and optional **Beatrice v2** on native ARM-NEON behind a ~1.6 MB SwiftUI and CoreAudio app. No Electron, PyTorch, librosa, FAISS, or full Xcode required.
+True **real-time RVC v2** on Apple Silicon without needing a gaming PC or 16+ GB of unified memory. SwiftRVC pairs a ~1.6 MB native SwiftUI and CoreAudio client with a pure-MLX RVC v2 pipeline and optional native ARM-NEON **Beatrice v2** engine, keeping memory low enough to run alongside Discord, browsers, and games on a base **M1 8GB** Mac.
+
+No Electron, PyTorch, librosa, FAISS, weight-conversion scripts, or full Xcode install required.
 
 
 
@@ -34,28 +36,47 @@ Runs **RVC v2** on Apple MLX and optional **Beatrice v2** on native ARM-NEON beh
   <img src="assets/demo.gif" alt="SwiftRVC macOS UI" width="320" />
 </div>
 
-
-
-
 ## Features
 
-- **RVC v2 on Apple MLX:** Pure-MLX ContentVec, BN-folded RMVPE, Fast YIN, and NSF-HiFiGAN with direct `.pth` loading and memory-mapped `.index` retrieval using ~6 MB RAM instead of 270+ MB.
+- **Real-time RVC v2 on Apple MLX:** Pure-MLX ContentVec, BN-folded RMVPE, Fast YIN, tail-cropped NSF-HiFiGAN, and phase-aligned SOLA crossfading. Loads standard `.pth` files directly with zero `.safetensors` conversion step.
 
-- **Beatrice v2 on ARM-NEON:** Optional C++ bridge to `libbeatrice.a` for `2.0.0-alpha.2`, `beta.1`, and `rc.0` packs, including multi-speaker TOML packs.
+- **Memory-mapped `.index` retrieval:** Reads FAISS IVF-Flat and Flat `.index` files directly via `mmap` so a 256 MB index uses only **6.4 MB RAM** and opens in **34 ms**.
+
+- **Beatrice v2 on ARM-NEON:** Optional C++ bridge to `libbeatrice.a` for `2.0.0-alpha.2`, `beta.1`, and `rc.0` packs, including 100-voice TOML packs, running on CPU at 0% GPU.
 
 - **Low memory and idle sleep:** Switching engines unloads the inactive engine immediately, and the noise gate drops GPU/CPU inference to 0% when silent.
 
-- **3 live input sources:** Native CoreAudio mic capture with cubic 48 kHz resampling, audio/video file playback with loop, seek, quick mic sampling, and offline **Export WAV**, plus macOS 14.2+ CoreAudio Process Tap for system or per-app audio with **Mute original**.
+- **3 live input sources:** Native CoreAudio mic capture with cubic 48 kHz resampling, audio/video file playback with loop, seek, quick mic sampling, and fast offline **Export WAV**, plus macOS 14.2+ CoreAudio Process Tap for system or per-app audio with **Mute original**.
 
 - **Built-in live recorder:** One-click `Rec` streams converted 48 kHz WAV takes straight to `recordings/` with inline **Play**, **Save**, and **Finder** controls.
 
 - **Voice tuning and DSP:** Pitch from `-24` to `+24` st, Formant shift, soft Pitch Floor for deep voices, Polish chain with leveler, de-bass, F0 smoothing, and EQ, plus Protect, Shimmer, Intonation, RMS Mix, Gain, and per-model auto-save in `model_settings.json`.
 
+### **Currently in development:** 
+- For higher-end M-series chip (Pro/Max series, M2,M3,M4,M5,M6), currently implementing low-latency feature and customisable settings.
+- More helper sliders (dynamic split-band de-esser, micro-room reflections, and unvoiced breath restoration).
+
+## Why It Runs Real-Time on 8GB Macs
+
+Most desktop voice changers on macOS wrap PyTorch MPS and FAISS inside Electron, which pushes unified memory into swap on 8 GB machines once Discord and a browser are open. CLI or SDK-only MLX ports speed up offline inference, but typically lack a live CoreAudio streaming loop, SOLA crossfading, and virtual-cable/app routing.
+
+| Metric on Base M1 8GB | **SwiftRVC** | Typical Electron + PyTorch MPS Client | Typical Offline MLX Port |
+|---|---|---|---|
+| **Live Mic / App Streaming** | Native CoreAudio AUHAL + Process Tap | Browser WebAudio / PortAudio bridge | Offline files or developer SDK |
+| **App + Engine RAM** | **502-861 MB** on RVC, **148 MB** on Beatrice | ~2.5-5.0 GB, often swaps on 8 GB Macs | ~500-900 MB |
+| **256 MB `.index` RAM Cost** | **6.4 MB** via `mmap` | ~260+ MB loaded into RAM | Varies, often full RAM load |
+| **RVC Inference per Chunk** | **39-121 ms** across Fast to Quality | ~180-350+ ms due to MPS overhead | Fast offline, no live SOLA loop |
+| **Model Format** | Drop-in `.pth` + `.index` | Drop-in `.pth` + `.index` | Often requires `.safetensors` conversion |
+| **Idle GPU Usage** | **0% GPU** when gated | Continuous background overhead | N/A |
+| **Build / Bundle Footprint** | **~1.6 MB** `.app`, Command Line Tools only | Multi-GB packaged bundle | Python CLI or full Xcode build |
+
 ## Benchmarks on Base M1 8GB
 
-Measured on a base **Apple M1 8GB MacBook Air** on 48 kHz speech audio using Activity Monitor physical memory footprint.
+All numbers below were measured directly on a fanless base **Apple M1 8GB MacBook Air** on 48 kHz speech audio, reporting macOS physical memory footprint matching Activity Monitor. An RTF below `1.00x` means inference finishes faster than the audio chunk arrives, sustaining glitch-free real-time output.
 
-### RVC v2 on Apple MLX
+### Real-Time RVC v2 Presets on Apple MLX
+
+Tested on a 40 kHz RVC v2 model.
 
 | Preset | Block | F0 | Inference | RTF | Total Latency | RAM |
 |---|---:|---|---:|---:|---:|---:|
@@ -65,9 +86,21 @@ Measured on a base **Apple M1 8GB MacBook Air** on 48 kHz speech audio using Act
 | Quality | 240 ms | RMVPE fp16 | 120.7 ms | 0.50x | 436 ms | 780 MB |
 | Ultra Qual | 300 ms | RMVPE fp32 | 170.6 ms | 0.57x | 576 ms | 861 MB |
 
-### Beatrice v2 on ARM-NEON
+### RVC v2 Sample Rates, Model Switching, and `.index` Overhead
 
-Tested with the 100-voice `2.0.0-rc.0` JVS pack on CPU at 0% GPU.
+Tested across `32 kHz`, `40 kHz`, and `48 kHz` RVC v2 checkpoints on the same M1 8GB Mac.
+
+| Workload | Measured Result on M1 8GB |
+|---|---|
+| **32 kHz RVC v2 + `.index`** | Real-time `0.70x` RTF in Balanced, **3.3x** real-time offline export, **624 MB** RAM |
+| **40 kHz RVC v2** | Real-time `0.54-0.73x` RTF in Balanced, **4.4x** real-time offline export, **729-761 MB** RAM |
+| **48 kHz RVC v2** | Real-time `0.79x` RTF in Balanced, **3.7x** real-time offline export, **791 MB** RAM |
+| **Hot model switch** | **0.27-0.29 s** between `.pth` models once base weights are warm |
+| **256.4 MB `.index` lookup** | **6.4 MB** RAM, **34 ms** open time, **2.0 ms** per 24-frame k-NN blend |
+
+### Beatrice v2 Presets on ARM-NEON
+
+Tested with the 100-voice `2.0.0-rc.0` JVS pack on CPU at 0% GPU. Pack load time is **141 ms**, and offline batch conversion runs at **10.4x** real-time.
 
 | Preset | Block | VQ | Inference | RTF | Total Latency | RAM |
 |---|---:|---:|---:|---:|---:|---:|
@@ -121,4 +154,5 @@ SwiftRVC is licensed under the MIT License. See [LICENSE](LICENSE). Optional ext
 MIT License
 Copyright (c) 2026 Fargile
 
-Built with AI assistance from **Google Gemini**. Not affiliated with Apple Inc.
+Built and benchmarked with help from AI assistance: **Google Gemini**. 
+Project Not affiliated with **Apple Inc.**
