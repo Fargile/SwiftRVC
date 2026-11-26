@@ -182,7 +182,7 @@ SwiftRVC was written from scratch using public docs and standard model formats. 
 
 - **Source Code:** Licensed under the [MIT License](LICENSE).
 
-- **Logo & App Icon:** `assets/logo.png`, `app/Resources/logo.png`, and `app/Resources/AppIcon.icns` are licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/). You may use them freely for personal or commercial projects, provided you credit **Fargile** wherever the logo is visible and do not alter or deface it.
+- **Logo & App Icon:** `assets/logo.png`, `app/Resources/logo.png`, and `app/Resources/AppIcon.icns` are licensed under [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/). You may use them freely for personal or commercial projects, provided you credit **Fargile** wherever the logo is visible and do not alter or deface it (recolors are acceptable).
 
 - **Third-Party Components:** Optional external components such as MLX base weights, Project Beatrice's `libbeatrice.a` and voice packs, and BlackHole 2ch keep their own licenses. See [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
